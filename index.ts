@@ -1,15 +1,11 @@
 import puppeteer from "puppeteer";
 
 async function getClasses() {
-  const browser = await puppeteer.launch({ headless: "new" });
-  // const browser = await puppeteer.launch({ headless: false });
-  const page = await browser.newPage();
-
-  // Clear cookies
-  const cookies = await page.cookies();
-  for (let cookie of cookies) {
-    await page.deleteCookie(cookie);
-  }
+  const browser = await puppeteer.launch({
+    headless: process.env.VERCEL_ENV === "production" ? "new" : false,
+  });
+  const context = await browser.createIncognitoBrowserContext();
+  const page = await context.newPage();
 
   page.setViewport({ width: 1920, height: 1080 });
 
