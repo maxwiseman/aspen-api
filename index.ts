@@ -1,8 +1,8 @@
 import puppeteer from "puppeteer";
 
 async function getClasses() {
-  // const browser = await puppeteer.launch({ headless: "new" });
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: "new" });
+  // const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
 
   // Clear cookies
@@ -15,7 +15,7 @@ async function getClasses() {
 
   // Login
   await page.goto("https://aspen.knoxschools.org");
-  await page.waitForSelector("#username", { timeout: 5000 });
+  await page.waitForSelector("#username", { timeout: 2000 });
   await page.type("#username", process.env.ASPEN_USERNAME || "");
   await page.type("#password", process.env.ASPEN_PASSWORD || "");
   await page.click("#logonButton");
@@ -32,7 +32,7 @@ async function getClasses() {
   await page.goto(
     "https://aspen.knoxschools.org/aspen/portalClassList.do?navkey=academics.classes.list"
   );
-  await page.waitForSelector(".listGrid", { timeout: 5000 });
+  await page.waitForSelector(".listGrid", { timeout: 2000 });
   await page.screenshot({ path: "output.png" });
   await browser.close();
 }
