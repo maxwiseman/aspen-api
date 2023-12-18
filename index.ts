@@ -28,7 +28,7 @@ async function getClasses() {
     console.log("Login successful!");
   }
 
-  // Go to the Academics taber
+  // Go to the Academics tab
   await page.goto(
     "https://aspen.knoxschools.org/aspen/portalClassList.do?navkey=academics.classes.list"
   );
