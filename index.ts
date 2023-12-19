@@ -1,3 +1,4 @@
+import { getCategories } from "./src/get-categories";
 import { getClasses } from "./src/get-classes";
 
-getClasses();
+getCategories("SSC00000Q9Vnik");
