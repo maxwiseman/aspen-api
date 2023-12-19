@@ -18,7 +18,7 @@ export async function getClasses() {
 
   // Go to the Academics tab
   await GoToAcademics(page);
-  await page.screenshot({ path: "output.png" });
+  if (!process.env.VERCEL_ENV) await page.screenshot({ path: "output.png" });
 
   // Get all of the class IDs
   const links = await page.$$eval(
