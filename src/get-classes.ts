@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer";
-import { GoToAcademics, Login } from "./lib";
+import { capitalize, decapitalize, goToAcademics, login } from "./lib";
 
 export async function getClasses() {
   const browser = await puppeteer.launch({
@@ -11,13 +11,13 @@ export async function getClasses() {
   page.setViewport({ width: 1920, height: 1080 });
 
   // Login
-  await Login(page, async () => {
+  await login(page, async () => {
     console.log("Credentials incorrect!");
     await browser.close();
   });
 
   // Go to the Academics tab
-  await GoToAcademics(page);
+  await goToAcademics(page);
   if (!process.env.VERCEL_ENV) await page.screenshot({ path: "output.png" });
 
   // Get all of the class IDs
@@ -61,15 +61,28 @@ export async function getClasses() {
     "#dataGrid tr:not(:first-of-type) > td:nth-of-type(10)",
     elements => elements.map(element => element.innerText)
   );
+
+  const formattedTeachers = teachers.map((teacher: string) => {
+    let teacherSplit = teacher.split("; ");
+    return teacherSplit.map((singleTeacher: string) => {
+      let singleTeacherNames = singleTeacher.split(", ");
+      return (
+        capitalize(singleTeacherNames[1]) +
+        " " +
+        capitalize(singleTeacherNames[0])
+      );
+    });
+  });
+
   const data = links.map((link, index) => {
     return {
       id: /(?<=javascript:doParamSubmit\(2100, document.forms\['classListForm'\], ').*(?='\))/.exec(
         links[index]
       )?.[0],
-      name: names[index],
+      name: decapitalize(names[index]),
       schedule: schedule[index],
       term: term[index],
-      teachers: teachers[index].split(";"),
+      teachers: formattedTeachers[index],
       teacherEmail: teacherEmails[index],
       termGrade: parseInt(termGrades[index]) || 100,
       absences: parseInt(absences[index]),

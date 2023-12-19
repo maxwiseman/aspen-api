@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer";
-import { GoToAcademics, Login } from "./lib";
+import { goToAcademics, login } from "./lib";
 
 export async function getCategories(id: string) {
   const browser = await puppeteer.launch({
@@ -11,13 +11,13 @@ export async function getCategories(id: string) {
   page.setViewport({ width: 1920, height: 1080 });
 
   // Login
-  await Login(page, async () => {
+  await login(page, async () => {
     console.log("Credentials incorrect!");
     await browser.close();
   });
 
   // Go to the Academics tab
-  await GoToAcademics(page);
+  await goToAcademics(page);
 
   // Go to class by ID
   await page.evaluate(
