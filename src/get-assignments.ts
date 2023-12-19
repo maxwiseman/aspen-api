@@ -61,6 +61,10 @@ export async function getAssignments(id: string) {
     "#dataGrid tr:not(:first-of-type) td:nth-of-type(8) td:nth-of-type(2)",
     elements => elements.map(element => element.innerText)
   );
+  const feedback = await page.$$eval(
+    "#dataGrid tr:not(:first-of-type) td:nth-of-type(9)",
+    elements => elements.map(element => element.innerText)
+  );
 
   const data = name.map((assignmentName, index) => {
     return {
@@ -71,6 +75,7 @@ export async function getAssignments(id: string) {
       dateDue: Date.parse(dateDue[index]),
       extraCredit: extraCredit[index] === "Y",
       score: parseFloat(score[index]) || "M",
+      feedback: feedback[index],
     };
   });
   console.log(data);
