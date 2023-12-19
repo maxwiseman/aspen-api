@@ -33,35 +33,35 @@ export async function getAssignments(id: string) {
 
   // Extract data
   const name = await page.$$eval(
-    "#dataGrid tr:not(:first-of-type) td:nth-of-type(2) a",
+    "#dataGrid tr:not(:first-of-type) > td:nth-of-type(2) a",
     elements => elements.map(element => element.innerText)
   );
   const category = await page.$$eval(
-    "#dataGrid tr:not(:first-of-type) td:nth-of-type(3)",
+    "#dataGrid tr:not(:first-of-type) > td:nth-of-type(3)",
     elements => elements.map(element => element.innerText)
   );
   const pointsPossible = await page.$$eval(
-    "#dataGrid tr:not(:first-of-type) td:nth-of-type(4)",
+    "#dataGrid tr:not(:first-of-type) > td:nth-of-type(4)",
     elements => elements.map(element => element.innerText)
   );
   const dateAssigned = await page.$$eval(
-    "#dataGrid tr:not(:first-of-type) td:nth-of-type(5)",
+    "#dataGrid tr:not(:first-of-type) > td:nth-of-type(5)",
     elements => elements.map(element => element.innerText)
   );
   const dateDue = await page.$$eval(
-    "#dataGrid tr:not(:first-of-type) td:nth-of-type(6)",
+    "#dataGrid tr:not(:first-of-type) > td:nth-of-type(6)",
     elements => elements.map(element => element.innerText)
   );
   const extraCredit = await page.$$eval(
-    "#dataGrid tr:not(:first-of-type) td:nth-of-type(7)",
+    "#dataGrid tr:not(:first-of-type) > td:nth-of-type(7)",
     elements => elements.map(element => element.innerText)
   );
   const score = await page.$$eval(
-    "#dataGrid tr:not(:first-of-type) td:nth-of-type(8) td:nth-of-type(2)",
+    "#dataGrid tr:not(:first-of-type) > td:nth-of-type(8) td:nth-of-type(2)",
     elements => elements.map(element => element.innerText)
   );
   const feedback = await page.$$eval(
-    "#dataGrid tr:not(:first-of-type) td:nth-of-type(9)",
+    "#dataGrid tr:not(:first-of-type) > td:nth-of-type(9)",
     elements => elements.map(element => element.innerText)
   );
 

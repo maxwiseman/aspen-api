@@ -27,24 +27,24 @@ export async function getCategories(id: string) {
 
   // Extract data
   const names = await page.$$eval(
-    "#dataGridRight tr:nth-of-type(even):not(:last-of-type):not(:nth-last-of-type(2)) td:nth-of-type(1)",
+    "#dataGridRight tr:nth-of-type(even):not(:last-of-type):not(:nth-last-of-type(2)) > td:nth-of-type(1)",
     elements => elements.map(element => element.innerText)
   );
   const weights = await page.$$eval(
-    "#dataGridRight tr:nth-of-type(even):not(:last-of-type):not(:nth-last-of-type(2)) td:nth-of-type(3)",
+    "#dataGridRight tr:nth-of-type(even):not(:last-of-type):not(:nth-last-of-type(2)) > td:nth-of-type(3)",
     elements => elements.map(element => element.innerText)
   );
   const values = await page.$$eval(
-    "#dataGridRight tr:nth-of-type(odd):not(first-of-type):not(:last-of-type):not(:nth-last-of-type(2)) td:nth-of-type(2)",
+    "#dataGridRight tr:nth-of-type(odd):not(first-of-type):not(:last-of-type):not(:nth-last-of-type(2)) > td:nth-of-type(2)",
     elements => elements.map(element => element.innerText)
   );
   const average = await page.$eval(
-    "#dataGridRight tr:nth-last-of-type(2) td:nth-of-type(2)",
+    "#dataGridRight tr:nth-last-of-type(2) > td:nth-of-type(2)",
     element => element.innerText
   );
 
   const data = {
-    average: parseFloat(average) / 100,
+    average: parseFloat(average),
     categories: names.map((name, index) => {
       return {
         name: names[index],
