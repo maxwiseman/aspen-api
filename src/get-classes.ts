@@ -92,17 +92,6 @@ export async function getClasses() {
   });
   console.log(data);
   await browser.close();
-}
 
-export interface ClassData {
-  id: string;
-  name: string;
-  schedule: string;
-  term: string;
-  teachers: string[];
-  teacherEmail: string;
-  termGrade: number;
-  absences: number;
-  tardies: number;
-  dismissals: number;
+  return data;
 }

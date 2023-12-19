@@ -81,4 +81,6 @@ export async function getAssignments(id: string) {
   console.log(data);
 
   await browser.close();
+
+  return data;
 }

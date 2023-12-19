@@ -57,4 +57,6 @@ export async function getCategories(id: string) {
 
   console.log(data);
   await browser.close();
+
+  return data;
 }
