@@ -45,12 +45,12 @@ export async function getCategories(id: string) {
   );
 
   const data = {
-    average: parseInt(average) / 100,
+    average: parseFloat(average) / 100,
     categories: names.map((name, index) => {
       return {
         name: names[index],
-        weight: parseInt(weights[index]) / 100,
-        value: parseInt(values[index]),
+        weight: parseFloat(weights[index]) / 100,
+        value: parseFloat(values[index]),
       };
     }),
   };
