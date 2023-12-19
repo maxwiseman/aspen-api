@@ -7,10 +7,12 @@ export async function login(page: Page, onError: () => void) {
   await page.type("#password", process.env.ASPEN_PASSWORD || "");
   await page.click("#logonButton");
   try {
-    await page.waitForSelector(".errorMessageH1", { timeout: 500 });
-    onError();
-  } catch {
+    await page.waitForSelector(".navTab", { timeout: 500 });
     console.log("Login successful!");
+  } catch {
+    await page.waitForSelector(".errorMessageH1", { timeout: 500 });
+    console.log("Credentials incorrect!");
+    onError();
   }
 }
 

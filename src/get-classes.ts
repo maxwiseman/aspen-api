@@ -12,7 +12,6 @@ export async function getClasses() {
 
   // Login
   await login(page, async () => {
-    console.log("Credentials incorrect!");
     await browser.close();
   });
 

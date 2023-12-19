@@ -12,7 +12,6 @@ export async function getAssignments(id: string) {
 
   // Login
   await login(page, async () => {
-    console.log("Credentials incorrect!");
     await browser.close();
   });
 
